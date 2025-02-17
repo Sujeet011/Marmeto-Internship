@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const cartItemsContainer = document.getElementById("cart-items");
     const subtotalElement = document.getElementById("subtotal");
     const totalElement = document.getElementById("total");
+    const checkoutButton = document.getElementById("checkout");
 
     // Fetch cart data
     const response = await fetch("https://cdn.shopify.com/s/files/1/0883/2188/4479/files/apiCartData.json?v=1728384889");
@@ -9,26 +10,29 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     let cartItems = cartData.items;
 
-    // Function to render cart items
     function renderCart() {
         cartItemsContainer.innerHTML = "";
         let subtotal = 0;
 
         cartItems.forEach(item => {
-            let itemSubtotal = (item.price * item.quantity) / 100;
+            const itemSubtotal = (item.price * item.quantity) / 100;
             subtotal += itemSubtotal;
 
-            cartItemsContainer.innerHTML += `
-                <tr>
-                    <td><img src="${item.image}" alt="${item.title}"> ${item.title}</td>
-                    <td>₹${(item.price / 100).toFixed(2)}</td>
-                    <td><input type="number" min="1" value="${item.quantity}" data-id="${item.id}"></td>
-                    <td>₹${itemSubtotal.toFixed(2)}</td>
-                    <td><button class="remove-btn" data-id="${item.id}">🗑️</button></td>
-                </tr>
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td><img src="${item.image}" alt="${item.title}"> ${item.title}</td>
+                <td>₹${(item.price / 100).toFixed(2)}</td>
+                <td><input type="number" min="1" value="${item.quantity}" name="quantity_${item.id}" id="quantity_${item.id}" data-id="${item.id}"></td>
+                <td>₹${itemSubtotal.toFixed(2)}</td>
+                <td><button class="remove-btn" data-id="${item.id}">🗑️</button></td>
             `;
+            
+            // Append row to the table
+            cartItemsContainer.appendChild(row);
         });
 
+        // Update subtotal and total
         subtotalElement.textContent = `₹${subtotal.toFixed(2)}`;
         totalElement.textContent = `₹${subtotal.toFixed(2)}`;
 
@@ -42,22 +46,36 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const itemId = event.target.dataset.id;
                 const newQuantity = parseInt(event.target.value);
                 const item = cartItems.find(i => i.id == itemId);
+
                 if (newQuantity > 0) {
                     item.quantity = newQuantity;
-                    renderCart();
+                    renderCart(); 
                 }
             });
         });
 
+        // Remove item event
         document.querySelectorAll(".remove-btn").forEach(button => {
             button.addEventListener("click", event => {
                 const itemId = event.target.dataset.id;
-                cartItems = cartItems.filter(i => i.id != itemId);
-                renderCart();
+                cartItems = cartItems.filter(i => i.id != itemId); 
+                renderCart(); 
             });
         });
     }
 
-    // Initial render
+    // Event listener for checkout button click
+    checkoutButton.addEventListener("click", () => {
+        const cartDataToLog = cartItems.map(item => ({
+            title: item.title,
+            quantity: item.quantity,
+            price: (item.price / 100).toFixed(2),
+            subtotal: ((item.price * item.quantity) / 100).toFixed(2) 
+        }));
+
+        console.log("Cart Data at Checkout:", cartDataToLog);
+
+    });
+
     renderCart();
 });
