@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marmeto Cart</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo"><img style="cursor: pointer;" src="https://marmeto.com/cdn/shop/files/re-black-logo.png?v=1716890348&width=500" alt="Marmeto"></div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Shop</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            </nav>
+            <div class="header-icons">
+                <a href="#">🔍</a>
+                <a href="#">❤️</a>
+                <a href="#">🛒</a>
+            </div>
+    </header>
+
+    <!-- Banner -->
+    <section class="banner">
+        <img style="width: 15%;margin-top: -30px; margin-bottom: -20px; cursor: pointer;" src="https://marmeto.com/cdn/shop/files/re-black-logo.png?v=1716890348&width=500" alt="Marmeto">
+        <h1>Cart</h1>
+        <p style="text-decoration: underline; cursor: pointer;">Home > Cart</p>
+    </section>
+
+    <!-- Cart Container -->
+    <div class="cart-container">
+        
+        <!-- Cart Table -->
+        <div class="cart-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items">
+                    <!-- Items will be dynamically loaded here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Cart Totals -->
+        <div class="cart-totals">
+            <h3>Cart Totals</h3>
+            <p>Subtotal: <span id="subtotal">₹0.00</span></p>
+            <p>Total: <span id="total">₹0.00</span></p>
+            <button id="checkout">Check Out</button>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-info">
+            <p>🏆 High Quality | 🔒 Warranty Protection | 🚚 Free Shipping | 📞 24/7 Support</p>
+        </div>
+    </footer>
+
+</body>
+</html>
