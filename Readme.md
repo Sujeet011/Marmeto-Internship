@@ -1,3 +1,5 @@
+Deployed link :- https://radiant-cat-0d8cd9.netlify.app/
+
 Cart Page - Responsive and Functional E-commerce Cart
 This project involves creating a responsive and functional cart page for an e-commerce website using HTML, CSS, and JavaScript. The cart page dynamically loads cart item details from a provided JSON API and allows users to interact with the cart by adjusting quantities, removing items, and viewing updated total prices.
 
